@@ -15,6 +15,20 @@
   --font-mono: 'DM Mono', monospace;
 }
 
+[data-theme="light"] {
+  --bg: #f8f8fc;
+  --bg-2: #ffffff;
+  --surface: #ffffff;
+  --border: #e0e0e8;
+  --accent: #7c6af7;
+  --accent-2: #e05cf7;
+  --accent-warm: #f7955c;
+  --text: #1a1a2e;
+  --text-muted: #6a6a7a;
+  --font-display: 'Syne', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+}
+
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 

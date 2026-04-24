@@ -1,8 +1,10 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import ProfilePicture from './ProfilePicture.png'
 
 export default function Hero() {
   const canvasRef = useRef(null)
+  const [typedText, setTypedText] = useState('')
+  const fullText = "IT Graduate specializing in database management, front-end and back-end development, and technical support. Detail-oriented, data-driven, and committed to building clean digital solutions."
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -35,6 +37,19 @@ export default function Hero() {
     return () => { cancelAnimationFrame(animId); window.removeEventListener('resize', resize) }
   }, [])
 
+  useEffect(() => {
+    let index = 0
+    const typeInterval = setInterval(() => {
+      if (index < fullText.length) {
+        setTypedText(fullText.slice(0, index + 1))
+        index++
+      } else {
+        clearInterval(typeInterval)
+      }
+    }, 30)
+    return () => clearInterval(typeInterval)
+  }, [])
+
   return (
     <section id="hero" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', position: 'relative', overflow: 'hidden' }}>
       <canvas ref={canvasRef} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none' }} />
@@ -48,7 +63,7 @@ export default function Hero() {
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '4rem', animation: 'fadeUp 0.7s ease 0.1s both' }}>
-          {/* Image placeholder - Replace src with your image path (e.g., './your-image.png' or './your-image.jpg') */}
+          
           <div style={{ flex: '0 0 auto', animation: 'fadeIn 0.8s ease 0.2s both' }}>
             <img 
               src={ProfilePicture} 
@@ -74,8 +89,7 @@ export default function Hero() {
 
             <div style={{ animation: 'fadeUp 0.7s ease 0.25s both' }}>
               <p style={{ fontFamily: 'var(--font-mono)', fontSize: 'clamp(0.9rem, 2vw, 1.05rem)', color: 'var(--text-muted)', maxWidth: '560px', lineHeight: 1.8, marginBottom: '3rem' }}>
-                IT Graduate specializing in database management, front-end and back-end development, and technical support.
-                Detail-oriented, data-driven, and committed to building clean digital solutions.
+                {typedText}<span style={{ animation: 'blink 1s step-end infinite' }}>|</span>
               </p>
             </div>
 
